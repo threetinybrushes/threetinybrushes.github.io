@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found | Three Tiny Brushes</title>
+<meta name="robots" content="noindex">
+<style>
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:#FFE3EE;color:#3A3350;font:600 17px/1.55 Nunito,system-ui,-apple-system,'Segoe UI',sans-serif;text-align:center;padding:24px;box-sizing:border-box}
+h1{font:700 clamp(34px,7vw,52px)/1.1 Quicksand,ui-rounded,'Trebuchet MS',sans-serif;margin:0 0 10px}
+p{color:#5A5270;margin:0 0 26px}
+.k{font-weight:900;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;color:#B0306A;margin-bottom:8px}
+a{display:inline-flex;align-items:center;min-height:48px;padding:0 26px;border-radius:999px;font-weight:800;text-decoration:none;margin:6px;color:#3A3350}
+.p{background:#FF8FB8}.s{background:#fff;border:2px solid #3A3350}
+a:focus-visible{outline:3px solid #6A4FD8;outline-offset:4px}
+</style>
+</head>
+<body>
+<main>
+<p class="k">Page not found</p>
+<h1>Oops, this page wandered off</h1>
+<p>Let's get you back to the paint kits.</p>
+<a class="p" id="home" href="/">Go to the homepage</a>
+<a class="s" href="https://threetinybrushes.square.site/">Shop kits</a>
+</main>
+<script>/* works both at the domain root and under /threetinybrushes-site/ on GitHub Pages */
+var m=location.pathname.match(/^\/threetinybrushes-site\//);if(m)document.getElementById('home').href=m[0];</script>
+</body>
+</html>
