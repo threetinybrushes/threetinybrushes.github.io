@@ -1,6 +1,6 @@
 # threetinybrushes-site
 
-Static marketing site for **Three Tiny Brushes** (personalized kids' paint name kits). No build step, no framework.
+Static marketing site for **Three Tiny Brushes** (paint-your-own kits for kids: personalized name kits, sibling kits, and room for seasonal kits and party packs). No build step, no framework.
 Checkout stays on Square: every "Shop" button links to https://threetinybrushes.square.site.
 
 - `index.html`: the single page. `404.html`: self-contained not-found page.
@@ -13,3 +13,7 @@ Checkout stays on Square: every "Shop" button links to https://threetinybrushes.
 Prices in `tools/build_html.py` mirror the live Square site (checked Sep 25, 2026). Update them there and rerun if Square changes.
 
 No CNAME yet. Add one only when the domain is ready to move.
+
+Dino photo: `img/dino-mite-{400,600,800,1600}.{jpg,webp}` (8 files). Referenced in `index.html` by the Dino-Mite shop card
+and the pickup section photo, and in JSON-LD as `img/dino-mite-1600.jpg`. To swap: replace those files (same names/sizes,
+or rerun `tools/make_images.py` from a new source photo), then rerun `tools/build_html.py`.

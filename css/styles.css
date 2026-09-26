@@ -113,3 +113,5 @@ section{padding:64px 0;scroll-margin-top:72px}
 .visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .pills{list-style:none}
 .news .row svg{width:20px;height:20px}
+.prod .opts{font-size:13px;color:var(--muted);margin:-6px 0 12px;line-height:1.35}
+.more .step .btn{margin-top:14px}
