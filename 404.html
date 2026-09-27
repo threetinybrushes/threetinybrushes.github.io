@@ -25,5 +25,7 @@ a:focus-visible{outline:3px solid #6A4FD8;outline-offset:4px}
 </main>
 <script>/* works both at the domain root and under /threetinybrushes-site/ on GitHub Pages */
 var m=location.pathname.match(/^\/threetinybrushes-site\//);if(m)document.getElementById('home').href=m[0];</script>
+<script>/* monitoring config (no-op while its IDs are empty); absolute path because this page is served at any URL */
+(function(){var s=document.createElement('script');s.src=(m?m[0]:'/')+'js/monitoring.js';s.defer=true;document.head.appendChild(s)})();</script>
 </body>
 </html>

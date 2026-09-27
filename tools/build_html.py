@@ -88,6 +88,7 @@ html=f'''<!doctype html>
 <link rel="stylesheet" href="{FONTS}" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="{FONTS}"></noscript>
 <link rel="stylesheet" href="css/styles.css">
+<script src="js/monitoring.js" defer></script>
 <script type="application/ld+json">{json.dumps(ld,ensure_ascii=False,separators=(',',':'))}</script>
 </head>
 <body>
