@@ -96,6 +96,7 @@ html=f'''<!doctype html>
  <a class="brand" href="#top" aria-label="Three Tiny Brushes, back to top"><picture><source type="image/webp" srcset="img/logo-64.webp 1x, img/logo-128.webp 2x"><img src="img/logo-128.png" width="58" height="58" alt=""></picture><span>Three Tiny Brushes</span></a>
  <nav class="nav" aria-label="Main">
   <a class="link" href="#how">How it works</a>
+  <a class="link" href="#story">Our story</a>
   <a class="link" href="#pickup">Pickup</a>
   <a class="btn btn-p btn-sm" href="{SQ}/">Shop kits</a>
  </nav>
@@ -146,6 +147,13 @@ html=f'''<!doctype html>
   <li class="card step"><div class="ico" style="background:var(--mint-t)" aria-hidden="true">✏️</div><p class="num" style="color:var(--mint-text)">STEP 2</p><h3>Add the details</h3><p>Name kit? Type your child's name and pick the size when you order. Other kits are ready to go.</p></li>
   <li class="card step"><div class="ico" style="background:var(--lav-t)" aria-hidden="true">📍</div><p class="num" style="color:var(--lav-text)">STEP 3</p><h3>Pickup or shipping</h3><p>Choose local pickup in North Augusta or shipping at checkout, then paint together.</p></li>
  </ol>
+</div></section>
+
+<section class="story" id="story" aria-labelledby="story-title"><div class="wrap story-in">
+ <div class="story-logo"><picture><source type="image/webp" srcset="img/logo-240.webp 1x, img/logo-480.webp 2x"><img src="img/logo-240.png" srcset="img/logo-240.png 1x, img/logo-480.png 2x" width="240" height="240" alt="Three Tiny Brushes logo: three paintbrushes in pink, mint and lavender" loading="lazy" decoding="async"></picture></div>
+ <div><p class="kicker">A family project</p><h2 id="story-title">Our story</h2>
+ <p>Three Tiny Brushes started with our oldest daughter. When she was six, she came to me wanting to start her own craft business, and she helped dream up the whole idea.</p>
+ <p>Together we designed our logo: three tiny brushes, one for each of our three girls, painted in each one's favorite colors. Every kit we make is a little piece of that family project, made for your little artist.</p></div>
 </div></section>
 
 <section id="siblings" aria-labelledby="sib-title"><div class="wrap split">

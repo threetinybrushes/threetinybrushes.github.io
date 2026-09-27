@@ -1,7 +1,6 @@
-/* Three Tiny Brushes: tokens from SPEC.md section 1; brand hues sampled from the logo brushes (mint #A1F7DA, pink #FF99D8, lavender #BEA1F7, gold #FFBB4A) */
-:root{--ink:#3A3350;--muted:#6B6480;--cream:#FFFBF7;--pink:#FF99D8;--pink-t:#FFD6EF;--pink-bg:#FFE3EE;--pink-text:#A82E79;--pink-head:#C1338B;
---mint:#A1F7DA;--mint-t:#D0FBEC;--mint-text:#1F7A5C;--lav:#BEA1F7;--lav-t:#E8DEFC;--lav-text:#7346CE;--lav-deep:#5E38A8;
---gold:#FFBB4A;--gold-t:#FFE7C0;--gold-text:#855200;
+/* Three Tiny Brushes: tokens from SPEC.md section 1 */
+:root{--ink:#3A3350;--muted:#6B6480;--cream:#FFFBF7;--pink:#FF8FB8;--pink-t:#FFD6E5;--pink-bg:#FFE3EE;--pink-text:#B0306A;--pink-head:#D6457F;
+--mint:#3CC79A;--mint-t:#CFF5E3;--mint-text:#1F7A5C;--lav:#9B7BFF;--lav-t:#E3D9FF;--lav-text:#6A4FD8;--lav-deep:#553BB8;
 --shadow:0 5px 20px rgba(58,51,80,.08);--head:'Quicksand','Quicksand Fallback',sans-serif;--body:'Nunito','Nunito Fallback',sans-serif}
 /* metric-matched fallbacks: keeps layout stable while Google Fonts swap in (CLS) */
 @font-face{font-family:"Nunito Fallback";src:local("Arial Bold"),local("Arial-BoldMT"),local("Liberation Sans Bold"),local("Arimo Bold"),local("Roboto Bold"),local("Arial");font-weight:100 1000;size-adjust:96%;ascent-override:105%;descent-override:37%;line-gap-override:0%}
@@ -26,8 +25,8 @@ h3{font-size:21px;line-height:1.25}
 :focus-visible{outline:3px solid var(--lav-text);outline-offset:3px;border-radius:6px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:48px;padding:12px 26px;border-radius:999px;font-family:var(--body);font-weight:800;font-size:16px;text-decoration:none;line-height:1.2;transition:transform .15s,box-shadow .15s}
 .btn:hover{transform:translateY(-2px)}
-.btn-p{background:var(--pink);color:var(--ink);box-shadow:0 6px 16px rgba(255,153,216,.35)}
-.btn-p:hover{box-shadow:0 8px 20px rgba(255,153,216,.5)}
+.btn-p{background:var(--pink);color:var(--ink);box-shadow:0 6px 16px rgba(255,143,184,.35)}
+.btn-p:hover{box-shadow:0 8px 20px rgba(255,143,184,.5)}
 .btn-s{background:#fff;color:var(--ink);border:2px solid var(--ink)}
 .btn-sm{min-height:40px;padding:8px 18px;font-size:15px}
 .btn:focus-visible{outline-offset:4px;border-radius:999px}
@@ -116,3 +115,11 @@ section{padding:64px 0;scroll-margin-top:72px}
 .news .row svg{width:20px;height:20px}
 .prod .opts{font-size:13px;color:var(--muted);margin:-6px 0 12px;line-height:1.35}
 .more .step .btn{margin-top:14px}
+/* our story */
+.story{background:var(--pink-bg)}
+.story-in{display:grid;gap:26px;align-items:center}
+.story-logo{width:180px;height:180px;border-radius:50%;background:#fff;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:center;margin:0 auto}
+.story-logo img{width:150px;height:150px}
+.story p:not(.kicker){color:#524A6A;font-size:18px;margin-top:12px;max-width:620px}
+@media (min-width:760px){.story-in{grid-template-columns:auto 1fr;gap:56px}.story-logo{width:260px;height:260px}.story-logo img{width:220px;height:220px}}
+@media (max-width:759px){.nav a.link[href="#story"]{display:none}}

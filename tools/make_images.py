@@ -22,7 +22,7 @@ hero=Image.open(f'{SRC}/hero-kits-collage.jpg').convert('RGB')
 for w in (560,800,1100): save(hero,'hero-kits',w,78)
 # logos
 lt=Image.open(f'{SRC}/logo-600-transparent.png').convert('RGBA')
-for s in (64,128):
+for s in (64,128,240,480):
     r=lt.resize((s,s),Image.LANCZOS); r.save(f'{OUT}/logo-{s}.png',optimize=True); r.save(f'{OUT}/logo-{s}.webp','WEBP',quality=85,method=6)
 lo=Image.open(f'{SRC}/logo-600.png').convert('RGBA')
 for s in (96,):
