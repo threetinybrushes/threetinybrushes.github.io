@@ -123,3 +123,11 @@ section{padding:64px 0;scroll-margin-top:72px}
 .story p:not(.kicker){color:#524A6A;font-size:18px;margin-top:12px;max-width:620px}
 @media (min-width:760px){.story-in{grid-template-columns:auto 1fr;gap:56px}.story-logo{width:260px;height:260px}.story-logo img{width:220px;height:220px}}
 @media (max-width:759px){.nav a.link[href="#story"]{display:none}}
+
+/* washable paint callout */
+.paint{background:var(--mint-t);padding:48px 0}
+.paint .kicker{color:var(--mint-text)}
+.paint-note{padding:28px 32px;max-width:720px;margin:0 auto;border-left:8px solid var(--mint)}
+.paint-note h2{font-size:clamp(24px,3.5vw,30px);margin-top:4px}
+.paint-note p:not(.kicker){color:#524A6A;font-size:18px;margin-top:12px}
+@media (min-width:760px){.paint{padding:56px 0}}
