@@ -12,8 +12,11 @@ PRODUCTS=[ # name, short, subtitle, full name on Square, price(s), path
 IG='https://www.instagram.com/threetinybrushes'; FB='https://www.facebook.com/threetinybrushes'
 EMAIL='threetinybrushes@gmail.com'
 MAILTO='mailto:threetinybrushes@gmail.com?subject=Add%20me%20to%20the%20Three%20Tiny%20Brushes%20list'
-MAIL_FAVORS='mailto:threetinybrushes@gmail.com?subject=Party%20favors'
-MAIL_PACKS='mailto:threetinybrushes@gmail.com?subject=Group%20party%20packs'
+MAIL_PACKS='mailto:threetinybrushes@gmail.com?subject=Party%20packs'
+# Party-pack photo (none yet). When it arrives: run tools/make_images.py to make img/party-packs-{400,600,800,1600}.{jpg,webp},
+# then set PARTY_PHOTO='party-packs' and rerun this script. The photo renders at the top of the #party-packs card.
+PARTY_PHOTO=None
+PARTY_ALT='Three Tiny Brushes party packs'
 # All name kits share the same Square setup: required name field + two size options ($18 / $20).
 NAME_PROMPT='Please enter the name you would like to order'
 NAME_SIZES='3–5 letters $18 · 6–8 letters $20'
@@ -56,6 +59,7 @@ ld={"@context":"https://schema.org","@graph":[
   "address":{"@type":"PostalAddress","name":"Orange Otter Toys (pickup location)","streetAddress":"507 Georgia Ave, Suite A","addressLocality":"North Augusta","addressRegion":"SC","postalCode":"29841","addressCountry":"US"},
   "makesOffer":[{"@type":"Offer","itemOffered":{"@id":DOMAIN+"#"+p[1]}} for p in PRODUCTS]}
 ]+[dict(ld_products[i],**{"@id":DOMAIN+"#"+PRODUCTS[i][1]}) for i in range(5)]}
+party_photo=('\n   '+pic(PARTY_PHOTO,PARTY_ALT,"(min-width:760px) 520px, calc(100vw - 88px)",cls='party-photo')) if PARTY_PHOTO else ''
 FONTS='https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&amp;family=Quicksand:wght@700&amp;display=swap'
 html=f'''<!doctype html>
 <html lang="en">
@@ -134,11 +138,17 @@ html=f'''<!doctype html>
 
 <section class="more" id="more" aria-labelledby="more-title"><div class="wrap">
  <p class="kicker">More to paint</p><h2 id="more-title">Not just name kits</h2>
- <p class="sub">Seasonal kits, party favors and group party packs are on the way. Have something in mind? Just ask.</p>
+ <p class="sub">Seasonal kits are on the way, and party packs are just an email away. Have something in mind? Just ask.</p>
  <ul class="steps">
   <li class="card step"><div class="ico" style="background:var(--pink-t)" aria-hidden="true">🍂</div><p class="num" style="color:var(--pink-text)">COMING SOON</p><h3>Seasonal kits</h3><p>Paint kits for holidays and the seasons. Sign up below to hear when they're ready.</p><a class="btn btn-s btn-sm" href="#loop">Get updates</a></li>
-  <li class="card step"><div class="ico" style="background:var(--mint-t)" aria-hidden="true">🎁</div><p class="num" style="color:var(--mint-text)">ASK US</p><h3>Party favors</h3><p>Paint kits to send home from a birthday or class party. Email us and we'll help you plan.</p><a class="btn btn-s btn-sm" href="{MAIL_FAVORS}">Ask about favors</a></li>
-  <li class="card step"><div class="ico" style="background:var(--lav-t)" aria-hidden="true">🎉</div><p class="num" style="color:var(--lav-text)">ASK US</p><h3>Group party packs</h3><p>Painting with a group? Ask us about party packs for your crew.</p><a class="btn btn-s btn-sm" href="{MAIL_PACKS}">Ask about party packs</a></li>
+  <li class="card step party" id="party-packs">
+   <!-- PARTY-PACK PHOTO goes here (set PARTY_PHOTO in tools/build_html.py; no placeholder until Rachel sends photos) -->{party_photo}
+   <div class="ico" style="background:var(--pink-t)" aria-hidden="true">🎉</div><p class="num" style="color:var(--pink-text)">ASK US</p><h3>Party packs</h3>
+   <p class="offer">Planning a birthday? Order 15+ party packs and we&rsquo;ll include a free name kit.</p>
+   <p class="pill deal"><span aria-hidden="true">🎁</span> 15+ packs = free name kit</p>
+   <p>Paint kits for every kid at the party. Email us to plan yours.</p>
+   <a class="btn btn-s btn-sm" href="{MAIL_PACKS}">Ask about party packs</a>
+  </li>
  </ul>
 </div></section>
 
