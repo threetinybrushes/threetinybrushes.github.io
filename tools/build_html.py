@@ -130,7 +130,7 @@ html=f'''<!doctype html>
 
 <section id="shop" aria-labelledby="shop-title"><div class="wrap">
  <p class="kicker">Shop kits</p><h2 id="shop-title">Pick a kit</h2>
- <p class="sub">Name kits are made with your child's name. When you order, type it in the box (“{NAME_PROMPT}”) and pick a size: {NAME_SIZES}. Big Bro and Big Sis kits are ready to go.</p>
+ <p class="sub">Name kits are personalized with your child's name. Don't forget to enter the name (and pick a size) when you order. Big Bro and Big Sis kits are ready to go.</p>
  <ul class="grid5">
 {chr(10).join(cards)}
  </ul>
