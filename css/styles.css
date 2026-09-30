@@ -89,6 +89,11 @@ section{padding:64px 0;scroll-margin-top:72px}
 .foot-links{display:flex;flex-wrap:wrap;gap:8px 18px}
 .foot-links a{padding:6px 0}
 .small{opacity:.85;font-size:14px}
+/* local + shipping line */
+.pickup .lead-local{color:var(--ink);font-size:19px}
+.foot-meta{display:grid;gap:4px}
+.foot-local{font-size:14px;color:#fff}
+.foot-local span{white-space:nowrap}
 /* responsive */
 @media (max-width:519px){.nav a.link{display:none}.brand span{font-size:18px}}
 @media (max-width:400px){.brand{gap:8px}.brand img{width:44px;height:44px}.brand span{font-size:16px}.site-header .btn-sm{padding:8px 14px}}
@@ -102,7 +107,9 @@ section{padding:64px 0;scroll-margin-top:72px}
  section{padding:80px 0}
  .site-footer .wrap{grid-template-columns:auto 1fr auto;align-items:center;justify-items:stretch}
  .foot-links{justify-content:center}
+ .foot-meta{text-align:right}
 }
+@media (min-width:760px) and (max-width:1159px){.site-footer .wrap{grid-template-columns:auto 1fr}.foot-links{justify-content:flex-end}.foot-meta{grid-column:1/-1;text-align:left}}
 @media (min-width:900px){
  .hero{padding:72px 0 84px}
  .hero .wrap{grid-template-columns:1.1fr .9fr;gap:40px}

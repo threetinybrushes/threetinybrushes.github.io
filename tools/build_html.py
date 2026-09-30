@@ -20,7 +20,7 @@ PARTY_ALT='Three Tiny Brushes party packs'
 # All name kits share the same Square setup: required name field + two size options ($18 / $20).
 NAME_PROMPT='Please enter the name you would like to order'
 NAME_SIZES='3–5 letters $18 · 6–8 letters $20'
-DESC="Paint-your-own kits for kids, including name kits personalized with your child's name. Local pickup in North Augusta, SC or shipping."
+DESC="Paint-your-own kits for kids, including name kits personalized with your child's name. Local pickup in North Augusta, SC or shipping nationwide."
 # Dino photo: img/dino-mite-{400,600,800,1600}.{jpg,webp}, used by the Dino-Mite shop card and the pickup section.
 # To swap it, replace those 8 files (or rerun tools/make_images.py with a new source) and rerun this script.
 fmt=lambda p:'$%.2f'%p
@@ -55,6 +55,7 @@ for name,short,sub,full,prices,path,alt in PRODUCTS:
 ld={"@context":"https://schema.org","@graph":[
  {"@type":"Store","@id":DOMAIN+"#store","name":"Three Tiny Brushes","url":DOMAIN,"logo":DOMAIN+"img/logo-128.png","image":DOMAIN+"img/og.jpg",
   "description":DESC,
+  "areaServed":[{"@type":"City","name":"Augusta, GA"},{"@type":"City","name":"North Augusta, SC"},{"@type":"Country","name":"United States"}],
   "email":EMAIL,"sameAs":[IG,FB,SQ+"/"],
   "address":{"@type":"PostalAddress","name":"Orange Otter Toys (pickup location)","streetAddress":"507 Georgia Ave, Suite A","addressLocality":"North Augusta","addressRegion":"SC","postalCode":"29841","addressCountry":"US"},
   "makesOffer":[{"@type":"Offer","itemOffered":{"@id":DOMAIN+"#"+p[1]}} for p in PRODUCTS]}
@@ -187,7 +188,8 @@ html=f'''<!doctype html>
 <section class="pickup" id="pickup" aria-labelledby="pickup-title"><div class="wrap split rev">
  <div class="polaroid-wrap">{pic("dino-mite","Dino-Mite personalized paint-your-own name kit","(min-width:1160px) 460px, (min-width:760px) 40vw, calc(100vw - 40px)",cls="polaroid tilt-r")}</div>
  <div><p class="kicker">Pickup &amp; shipping</p><h2 id="pickup-title">Pick up locally or get it shipped</h2>
- <p class="sub">Choose pickup at checkout and grab your kit at Orange Otter Toys in North Augusta. Not nearby? Choose shipping at checkout.</p>
+ <p class="sub lead-local">We&rsquo;re a local Augusta / North Augusta shop &mdash; pick up at Orange Otter Toys, or we ship nationwide.</p>
+ <p class="sub">Just choose pickup or shipping at checkout.</p>
  <address class="card addr"><strong><span aria-hidden="true">📍</span> Orange Otter Toys</strong>507 Georgia Ave, Suite A<br>North Augusta, SC 29841</address></div>
 </div></section>
 
@@ -209,7 +211,10 @@ html=f'''<!doctype html>
   <a href="{IG}" rel="noopener">{IG_SVG} Instagram</a>
   <a href="{FB}" rel="noopener">{FB_SVG} Facebook</a>
  </div>
- <p class="small">© 2026 Three Tiny Brushes · Checkout by Square</p>
+ <div class="foot-meta">
+  <p class="foot-local"><span>Local to Augusta &amp; North Augusta</span> · <span>Shipping nationwide</span></p>
+  <p class="small">© 2026 Three Tiny Brushes · Checkout by Square</p>
+ </div>
 </div></footer>
 </body>
 </html>
