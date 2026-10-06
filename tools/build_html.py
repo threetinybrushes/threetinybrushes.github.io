@@ -13,24 +13,35 @@ IG='https://www.instagram.com/threetinybrushes'; FB='https://www.facebook.com/th
 EMAIL='threetinybrushes@gmail.com'
 MAILTO='mailto:threetinybrushes@gmail.com?subject=Add%20me%20to%20the%20Three%20Tiny%20Brushes%20list'
 MAIL_PACKS='mailto:threetinybrushes@gmail.com?subject=Party%20packs'
-# Party-pack photo (none yet). When it arrives: run tools/make_images.py to make img/party-packs-{400,600,800,1600}.{jpg,webp},
-# then set PARTY_PHOTO='party-packs' and rerun this script. The photo renders at the top of the #party-packs card.
-PARTY_PHOTO=None
-PARTY_ALT='Three Tiny Brushes party packs'
+# Party packs section (#party-packs). Photos: img/party-*-{600,1000}.{webp,jpg} from `python3 tools/make_images.py party`.
+# PARTY_SHOP_URL = the "Shop party packs" button. Swap in the Square product URL once the party pack listing exists.
+PARTY_SHOP_URL='https://threetinybrushes.square.site/'
+PARTY_PRICES=(('$8','each'),('$6','each for 5 or more'),('$5','each for 20 or more'))
+PARTY_PROMO='Planning a birthday? Order 15+ party packs and we&rsquo;ll include a free Happy Birthday party pack.'
+PARTY_PILL='15+ packs = free Happy Birthday pack'
+PARTY_PACKS=[ # design name, image base, alt text
+ ('Unicorn &amp; Rainbow','party-unicorn-rainbow','Unicorn &amp; Rainbow party pack: a paintable unicorn head and rainbow with three paint pots and a brush'),
+ ('Dino Pals','party-dino-pals','Dino Pals party pack: a paintable T-rex and a small spiky dino with three paint pots and a brush'),
+ ('Dino Friends','party-dino-friends','Dino Friends party pack: a paintable long-neck dinosaur and triceratops with three paint pots and a brush'),
+ ('Smiley &amp; Star','party-smiley-star','Smiley &amp; Star party pack: a paintable smiley face and star with three paint pots and a brush'),
+ ('Mermaid &amp; Sun','party-mermaid-sun','Mermaid &amp; Sun party pack: a paintable mermaid tail and sun with three paint pots and a brush'),
+ ('Rainbow &amp; Smiley','party-rainbow-smiley','Rainbow &amp; Smiley party pack: a paintable rainbow and smiley face with three paint pots and a brush'),
+]
+PARTY_BDAY=('party-happy-birthday','Happy Birthday party pack: a paintable cake, present, party hat and &ldquo;Happy Birthday&rdquo; plaque with three paint pots and a brush')
 # All name kits share the same Square setup: required name field + two size options ($18 / $20).
 NAME_PROMPT='Please enter the name you would like to order'
 NAME_SIZES='3–5 letters $18 · 6–8 letters $20'
-DESC="Paint-your-own kits for kids, including name kits personalized with your child's name. Local pickup in North Augusta, SC or shipping nationwide."
+DESC="Paint-your-own kits for kids: name kits personalized with your child's name, plus party packs for birthdays. Local pickup in North Augusta, SC or shipping nationwide."
 # Dino photo: img/dino-mite-{400,600,800,1600}.{jpg,webp}, used by the Dino-Mite shop card and the pickup section.
 # To swap it, replace those 8 files (or rerun tools/make_images.py with a new source) and rerun this script.
 fmt=lambda p:'$%.2f'%p
-def pic(short,alt,sizes,cls='',lazy=True,w=1600,h=1600,variants=(400,600,800,1600)):
+def pic(short,alt,sizes,cls='',lazy=True,w=1600,h=1600,variants=(400,600,800,1600),src_w=800):
     ws=', '.join(f'img/{short}-{v}.webp {v}w' for v in variants)
     js=', '.join(f'img/{short}-{v}.jpg {v}w' for v in variants)
     la=' loading="lazy" decoding="async"' if lazy else ' fetchpriority="high" decoding="async"'
     c=f' class="{cls}"' if cls else ''
     return (f'<picture><source type="image/webp" srcset="{ws}" sizes="{sizes}">'
-            f'<img src="img/{short}-800.jpg" srcset="{js}" sizes="{sizes}" width="{w}" height="{h}" alt="{alt}"{c}{la}></picture>')
+            f'<img src="img/{short}-{src_w}.jpg" srcset="{js}" sizes="{sizes}" width="{w}" height="{h}" alt="{alt}"{c}{la}></picture>')
 IG_SVG='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.8.2 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1.1.4 2.2.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1.1.4-2.2.4-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.8-.2-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1.1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8c.1-1.2.2-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1.1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 2c-3.1 0-3.5 0-4.7.1-1 0-1.6.2-1.9.3-.5.2-.8.4-1.1.7-.3.3-.6.7-.7 1.1-.1.4-.3.9-.3 1.9-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c0 1 .2 1.6.3 1.9.2.5.4.8.7 1.1.3.3.7.6 1.1.7.4.1.9.3 1.9.3 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1 0 1.6-.2 1.9-.3.5-.2.8-.4 1.1-.7.3-.3.6-.7.7-1.1.1-.4.3-.9.3-1.9.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c0-1-.2-1.6-.3-1.9-.2-.5-.4-.8-.7-1.1-.3-.3-.7-.6-1.1-.7-.4-.1-.9-.3-1.9-.3-1.2-.1-1.6-.1-4.7-.1zm0 3.2a4.6 4.6 0 1 1 0 9.2 4.6 4.6 0 0 1 0-9.2zm0 7.6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm5.8-7.8a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0z"/></svg>'
 FB_SVG='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.3v7A10 10 0 0 0 22 12z"/></svg>'
 MAIL_SVG='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1 2.4V17h16V7.4l-8 5.3-8-5.3zM5.2 7l6.8 4.5L18.8 7H5.2z"/></svg>'
@@ -60,7 +71,9 @@ ld={"@context":"https://schema.org","@graph":[
   "address":{"@type":"PostalAddress","name":"Orange Otter Toys (pickup location)","streetAddress":"507 Georgia Ave, Suite A","addressLocality":"North Augusta","addressRegion":"SC","postalCode":"29841","addressCountry":"US"},
   "makesOffer":[{"@type":"Offer","itemOffered":{"@id":DOMAIN+"#"+p[1]}} for p in PRODUCTS]}
 ]+[dict(ld_products[i],**{"@id":DOMAIN+"#"+PRODUCTS[i][1]}) for i in range(5)]}
-party_photo=('\n   '+pic(PARTY_PHOTO,PARTY_ALT,"(min-width:760px) 520px, calc(100vw - 88px)",cls='party-photo')) if PARTY_PHOTO else ''
+ppic=lambda base,alt,sizes:pic(base,alt,sizes,w=600,h=800,variants=(600,1000),src_w=600)
+party_items='\n'.join(f'''  <li><figure>{ppic(base,alt,"(min-width:1160px) 338px, (min-width:760px) calc((100vw - 148px) / 3), calc((100vw - 86px) / 2)")}<figcaption>{name}</figcaption></figure></li>''' for name,base,alt in PARTY_PACKS)
+party_tiers=' <span class="dot" aria-hidden="true">·</span> '.join(f'<span class="tier"><b>{p}</b> {t}</span>' for p,t in PARTY_PRICES)
 FONTS='https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&amp;family=Quicksand:wght@700&amp;display=swap'
 html=f'''<!doctype html>
 <html lang="en">
@@ -137,18 +150,38 @@ html=f'''<!doctype html>
  <div class="center"><a class="btn btn-s" href="{SQ}/">See all kits</a></div>
 </div></section>
 
+<section class="party" id="party-packs" aria-labelledby="party-title"><div class="wrap">
+ <p class="kicker">Birthday &amp; class party favors</p><h2 id="party-title">Party packs</h2>
+ <p class="sub">Paint-it-yourself favors for birthdays and class parties. Each pack has paintable figures, three washable, non-toxic paints and a brush. Ages 3+.</p>
+ <ul class="party-grid" aria-label="Party pack designs">
+{party_items}
+ </ul>
+ <div class="party-buy">
+  <div class="card party-price">
+   <h3>Pricing</h3>
+   <p class="tiers" aria-label="Party pack pricing">{party_tiers}</p>
+   <div class="row"><a class="btn btn-p" href="{PARTY_SHOP_URL}">Shop party packs</a><a class="btn btn-s" href="{MAIL_PACKS}">Ask about party packs</a></div>
+  </div>
+  <div class="card party-promo">
+   <p class="pill deal"><span aria-hidden="true">🎁</span> {PARTY_PILL}</p>
+   <div class="promo-img">{ppic(PARTY_BDAY[0],PARTY_BDAY[1],"(min-width:760px) 180px, 110px")}</div>
+   <div class="promo-text">
+    <p class="offer">{PARTY_PROMO}</p>
+    <p class="promo-note">Your free pack: a cake, present, party hat and &ldquo;Happy Birthday&rdquo; plaque to paint.</p>
+   </div>
+  </div>
+ </div>
+</div></section>
+
 <section class="more" id="more" aria-labelledby="more-title"><div class="wrap">
  <p class="kicker">More to paint</p><h2 id="more-title">Not just name kits</h2>
- <p class="sub">Seasonal kits are on the way, and party packs are just an email away. Have something in mind? Just ask.</p>
+ <p class="sub">Seasonal kits are on the way, and party packs are ready for your next celebration. Have something in mind? Just ask.</p>
  <ul class="steps">
   <li class="card step"><div class="ico" style="background:var(--pink-t)" aria-hidden="true">🍂</div><p class="num" style="color:var(--pink-text)">COMING SOON</p><h3>Seasonal kits</h3><p>Paint kits for holidays and the seasons. Sign up below to hear when they're ready.</p><a class="btn btn-s btn-sm" href="#loop">Get updates</a></li>
-  <li class="card step party" id="party-packs">
-   <!-- PARTY-PACK PHOTO goes here (set PARTY_PHOTO in tools/build_html.py; no placeholder until Rachel sends photos) -->{party_photo}
-   <div class="ico" style="background:var(--pink-t)" aria-hidden="true">🎉</div><p class="num" style="color:var(--pink-text)">ASK US</p><h3>Party packs</h3>
-   <p class="offer">Planning a birthday? Order 15+ party packs and we&rsquo;ll include a free name kit.</p>
-   <p class="pill deal"><span aria-hidden="true">🎁</span> 15+ packs = free name kit</p>
-   <p>Paint kits for every kid at the party. Email us to plan yours.</p>
-   <a class="btn btn-s btn-sm" href="{MAIL_PACKS}">Ask about party packs</a>
+  <li class="card step party">
+   <div class="ico" style="background:var(--pink-t)" aria-hidden="true">🎉</div><p class="num" style="color:var(--pink-text)">NEW</p><h3>Party packs</h3>
+   <p>Six paint-it-yourself favor designs for birthdays and class parties, from $5 each.</p>
+   <a class="btn btn-s btn-sm" href="#party-packs">See party packs</a>
   </li>
  </ul>
 </div></section>

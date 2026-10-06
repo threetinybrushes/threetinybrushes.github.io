@@ -1,6 +1,6 @@
 # threetinybrushes-site
 
-Static marketing site for **Three Tiny Brushes** (paint-your-own kits for kids: personalized name kits, sibling kits, and room for seasonal kits and party packs). No build step, no framework.
+Static marketing site for **Three Tiny Brushes** (paint-your-own kits for kids: personalized name kits, sibling kits, party packs, and room for seasonal kits). No build step, no framework.
 Checkout stays on Square: every "Shop" button links to https://threetinybrushes.square.site.
 
 - `index.html`: the single page. `404.html`: self-contained not-found page.

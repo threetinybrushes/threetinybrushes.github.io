@@ -1,6 +1,7 @@
-"""Generate site images from ../site-revamp/images. Re-runnable."""
+"""Generate site images from ../site-revamp/images. Re-runnable.
+`python3 tools/make_images.py party` only (re)makes the party-pack photos (img/party-*-{600,1000}.{webp,jpg})."""
 from PIL import Image, ImageDraw, ImageFont
-import os, shutil
+import os, shutil, sys
 SRC='/workspace/threetinybrushes/site-revamp/images'
 OUT=os.path.join(os.path.dirname(__file__),'..','img')
 kits=['unicorn-wishes-personalized-paintable-name-kit','dino-mite-personalized-paintable-name-kit',
@@ -12,6 +13,17 @@ def save(im,base,w,q=80):
     r=im.resize((w,h),Image.LANCZOS) if w!=im.width else im
     r.save(f'{OUT}/{base}-{w}.webp','WEBP',quality=q,method=6)
     r.save(f'{OUT}/{base}-{w}.jpg','JPEG',quality=80 if w<1600 else 82,optimize=True,progressive=True)
+# Party packs (Rachel, 2026-10-06): 1086x1448 PNGs -> 600 / 1000 wide WebP + JPG. Source PNGs are not committed.
+PARTY_SRC='/workspace/threetinybrushes/incoming/2026-10-06-party-packs'
+PARTY={'party-pack-1':'party-unicorn-rainbow','party-pack-2':'party-dino-pals','party-pack-3':'party-dino-friends',
+       'party-pack-4':'party-smiley-star','party-pack-5':'party-mermaid-sun','party-pack-6':'party-rainbow-smiley',
+       'happy-birthday-pack':'party-happy-birthday'}
+def party():
+    for src,base in PARTY.items():
+        im=Image.open(f'{PARTY_SRC}/{src}.png').convert('RGB')
+        for w in (600,1000): save(im,base,w,78)
+if sys.argv[1:]==['party']:
+    party(); sys.exit()
 for k in kits:
     im=Image.open(f'{SRC}/{k}.jpg').convert('RGB')
     # 1600 JPEG = the new spec file, copied verbatim
