@@ -19,6 +19,10 @@ PARTY_SHOP_URL='https://threetinybrushes.square.site/product/party-pack/VT7LMGTI
 PARTY_PRICES=(('$8','each'),('$6','each for 5 or more'),('$5','each for 20 or more'))
 PARTY_PROMO='Planning a birthday? Order 15+ party packs and we&rsquo;ll include a free Happy Birthday party pack.'
 PARTY_PILL='15+ packs = free Happy Birthday pack'
+# Happy Birthday pack: 8th card in the grid (photo/alt = PARTY_BDAY). Flat price, no 5+/20+ discounts; still free with 15+ party packs.
+PARTY_BDAY_NAME='Happy Birthday'
+PARTY_BDAY_PRICE='$10'
+PARTY_BDAY_NOTE='Free with 15+ party packs'
 PARTY_PACKS=[ # design name, image base, alt text
  ('Unicorn &amp; Rainbow','party-unicorn-rainbow','Unicorn &amp; Rainbow party pack: a paintable unicorn head and rainbow with three paint pots and a brush'),
  ('Dino Pals','party-dino-pals','Dino Pals party pack: a paintable T-rex and a small spiky dino with three paint pots and a brush'),
@@ -73,7 +77,9 @@ ld={"@context":"https://schema.org","@graph":[
   "makesOffer":[{"@type":"Offer","itemOffered":{"@id":DOMAIN+"#"+p[1]}} for p in PRODUCTS]}
 ]+[dict(ld_products[i],**{"@id":DOMAIN+"#"+PRODUCTS[i][1]}) for i in range(5)]}
 ppic=lambda base,alt,sizes:pic(base,alt,sizes,w=600,h=800,variants=(600,1000),src_w=600)
-party_items='\n'.join(f'''  <li><figure>{ppic(base,alt,"(min-width:1160px) 338px, (min-width:760px) calc((100vw - 148px) / 3), calc((100vw - 86px) / 2)")}<figcaption>{name}</figcaption></figure></li>''' for name,base,alt in PARTY_PACKS)
+PARTY_SIZES="(min-width:1160px) 245px, (min-width:760px) calc((100vw - 182px) / 4), calc((100vw - 86px) / 2)"
+party_items='\n'.join(f'''  <li><figure>{ppic(base,alt,PARTY_SIZES)}<figcaption>{name}</figcaption></figure></li>''' for name,base,alt in PARTY_PACKS)
+party_items+=f'''\n  <li class="bday"><figure><div class="pp-img">{ppic(PARTY_BDAY[0],PARTY_BDAY[1],PARTY_SIZES)}<span class="pp-price"><span class="visually-hidden">Price: </span>{PARTY_BDAY_PRICE}</span></div><figcaption>{PARTY_BDAY_NAME}<span class="pp-note">{PARTY_BDAY_NOTE}</span></figcaption></figure></li>'''
 party_tiers=' <span class="dot" aria-hidden="true">·</span> '.join(f'<span class="tier"><b>{p}</b> {t}</span>' for p,t in PARTY_PRICES)
 FONTS='https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&amp;family=Quicksand:wght@700&amp;display=swap'
 html=f'''<!doctype html>
@@ -160,7 +166,9 @@ html=f'''<!doctype html>
  <div class="party-buy">
   <div class="card party-price">
    <h3>Pricing</h3>
-   <p class="tiers" aria-label="Party pack pricing">{party_tiers}</p>
+   <p class="tiers-label">Seven designs</p>
+   <p class="tiers" aria-label="Party pack pricing for the seven designs">{party_tiers}</p>
+   <p class="bday-price">Happy Birthday pack: <b>{PARTY_BDAY_PRICE}</b> (free with 15+ party packs)</p>
    <div class="row"><a class="btn btn-p" href="{PARTY_SHOP_URL}">Shop party packs</a><a class="btn btn-s" href="{MAIL_PACKS}">Ask about party packs</a></div>
   </div>
   <div class="card party-promo">
@@ -181,7 +189,7 @@ html=f'''<!doctype html>
   <li class="card step"><div class="ico" style="background:var(--pink-t)" aria-hidden="true">🍂</div><p class="num" style="color:var(--pink-text)">COMING SOON</p><h3>Seasonal kits</h3><p>Paint kits for holidays and the seasons. Sign up below to hear when they're ready.</p><a class="btn btn-s btn-sm" href="#loop">Get updates</a></li>
   <li class="card step party">
    <div class="ico" style="background:var(--pink-t)" aria-hidden="true">🎉</div><p class="num" style="color:var(--pink-text)">NEW</p><h3>Party packs</h3>
-   <p>Seven paint-it-yourself party pack designs for birthdays and class parties, from $5 each.</p>
+   <p>Seven paint-it-yourself party pack designs, plus a Happy Birthday pack. For birthdays and class parties, from $5 each.</p>
    <a class="btn btn-s btn-sm" href="#party-packs">See party packs</a>
   </li>
  </ul>
