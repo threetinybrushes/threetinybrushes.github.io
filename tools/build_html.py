@@ -15,7 +15,7 @@ MAILTO='mailto:threetinybrushes@gmail.com?subject=Add%20me%20to%20the%20Three%20
 MAIL_PACKS='mailto:threetinybrushes@gmail.com?subject=Party%20packs'
 # Party packs section (#party-packs). Photos: img/party-*-{600,1000}.{webp,jpg} from `python3 tools/make_images.py party`.
 # PARTY_SHOP_URL = the "Shop party packs" button. Swap in the Square product URL once the party pack listing exists.
-PARTY_SHOP_URL='https://threetinybrushes.square.site/'
+PARTY_SHOP_URL='https://threetinybrushes.square.site/product/party-pack/VT7LMGTIQBLTZOM6BSILZJJO'
 PARTY_PRICES=(('$8','each'),('$6','each for 5 or more'),('$5','each for 20 or more'))
 PARTY_PROMO='Planning a birthday? Order 15+ party packs and we&rsquo;ll include a free Happy Birthday party pack.'
 PARTY_PILL='15+ packs = free Happy Birthday pack'
