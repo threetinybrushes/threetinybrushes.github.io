@@ -166,6 +166,7 @@ html=f'''<!doctype html>
  <div class="party-buy">
   <div class="card party-price">
    <h3>Pricing</h3>
+   <p class="range-price"><span class="visually-hidden">Price range: </span>$5 to $10</p>
    <p class="tiers-label">Seven designs</p>
    <p class="tiers" aria-label="Party pack pricing for the seven designs">{party_tiers}</p>
    <p class="bday-price">Happy Birthday pack: <b>{PARTY_BDAY_PRICE}</b> (free with 15+ party packs)</p>
@@ -189,7 +190,7 @@ html=f'''<!doctype html>
   <li class="card step"><div class="ico" style="background:var(--pink-t)" aria-hidden="true">🍂</div><p class="num" style="color:var(--pink-text)">COMING SOON</p><h3>Seasonal kits</h3><p>Paint kits for holidays and the seasons. Sign up below to hear when they're ready.</p><a class="btn btn-s btn-sm" href="#loop">Get updates</a></li>
   <li class="card step party">
    <div class="ico" style="background:var(--pink-t)" aria-hidden="true">🎉</div><p class="num" style="color:var(--pink-text)">NEW</p><h3>Party packs</h3>
-   <p>Seven paint-it-yourself party pack designs, plus a Happy Birthday pack. For birthdays and class parties, from $5 each.</p>
+   <p>Seven paint-it-yourself party pack designs, plus a Happy Birthday pack. For birthdays and class parties, $5 to $10 each.</p>
    <a class="btn btn-s btn-sm" href="#party-packs">See party packs</a>
   </li>
  </ul>
