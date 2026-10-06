@@ -154,6 +154,8 @@ section{padding:64px 0;scroll-margin-top:72px}
 .party-grid figure{background:#fff;border-radius:20px;box-shadow:var(--shadow);padding:8px 8px 12px;height:100%}
 .party-grid img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:14px}
 .party-grid figcaption{font-family:var(--head);font-weight:700;font-size:16px;line-height:1.25;text-align:center;margin-top:10px}
+/* odd count: center the lone last pack (2-col: span both, half width) */
+.party-grid li:last-child:nth-child(odd){grid-column:1/-1;justify-self:center;width:calc((100% - 14px) / 2)}
 .party-buy{display:grid;gap:18px;margin-top:28px}
 .party-price,.party-promo{padding:22px}
 .party-price h3{font-size:20px}
@@ -172,6 +174,8 @@ section{padding:64px 0;scroll-margin-top:72px}
 @media (min-width:760px){
  .party-grid{grid-template-columns:repeat(3,1fr);gap:18px}
  .party-grid figcaption{font-size:18px}
+ .party-grid li:last-child:nth-child(odd){grid-column:auto;justify-self:stretch;width:auto}
+ .party-grid li:last-child:nth-child(3n+1){grid-column:2}
  .party-buy{grid-template-columns:1fr 1.15fr;align-items:stretch}
  .party-price,.party-promo{padding:26px 28px}
  .party-promo{grid-template-columns:180px 1fr;grid-template-areas:"img pill" "img text";grid-template-rows:auto 1fr;gap:12px 22px;align-items:start}

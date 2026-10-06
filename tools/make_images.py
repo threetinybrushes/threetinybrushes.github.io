@@ -16,7 +16,7 @@ def save(im,base,w,q=80):
 # Party packs (Rachel, 2026-10-06): 1086x1448 PNGs -> 600 / 1000 wide WebP + JPG. Source PNGs are not committed.
 PARTY_SRC='/workspace/threetinybrushes/incoming/2026-10-06-party-packs'
 PARTY={'party-pack-1':'party-unicorn-rainbow','party-pack-2':'party-dino-pals','party-pack-3':'party-dino-friends',
-       'party-pack-4':'party-smiley-star','party-pack-5':'party-mermaid-sun','party-pack-6':'party-rainbow-smiley',
+       'party-pack-4':'party-smiley-star','party-pack-5':'party-mermaid-sun','party-pack-6':'party-rainbow-smiley','party-pack-7':'party-princess-castle',
        'happy-birthday-pack':'party-happy-birthday'}
 def party():
     for src,base in PARTY.items():
