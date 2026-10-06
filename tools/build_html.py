@@ -151,8 +151,8 @@ html=f'''<!doctype html>
 </div></section>
 
 <section class="party" id="party-packs" aria-labelledby="party-title"><div class="wrap">
- <p class="kicker">Birthday &amp; class party favors</p><h2 id="party-title">Party packs</h2>
- <p class="sub">Paint-it-yourself favors for birthdays and class parties. Each pack has paintable figures, three washable, non-toxic paints and a brush. Ages 3+.</p>
+ <p class="kicker">For birthdays &amp; class parties</p><h2 id="party-title">Party packs</h2>
+ <p class="sub">Paint-it-yourself packs for every kid at the party. Each pack has paintable figures, three washable, non-toxic paints and a brush. Ages 3+.</p>
  <ul class="party-grid" aria-label="Party pack designs">
 {party_items}
  </ul>
@@ -180,7 +180,7 @@ html=f'''<!doctype html>
   <li class="card step"><div class="ico" style="background:var(--pink-t)" aria-hidden="true">🍂</div><p class="num" style="color:var(--pink-text)">COMING SOON</p><h3>Seasonal kits</h3><p>Paint kits for holidays and the seasons. Sign up below to hear when they're ready.</p><a class="btn btn-s btn-sm" href="#loop">Get updates</a></li>
   <li class="card step party">
    <div class="ico" style="background:var(--pink-t)" aria-hidden="true">🎉</div><p class="num" style="color:var(--pink-text)">NEW</p><h3>Party packs</h3>
-   <p>Six paint-it-yourself favor designs for birthdays and class parties, from $5 each.</p>
+   <p>Six paint-it-yourself party pack designs for birthdays and class parties, from $5 each.</p>
    <a class="btn btn-s btn-sm" href="#party-packs">See party packs</a>
   </li>
  </ul>
