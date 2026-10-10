@@ -1,5 +1,5 @@
 """Writes index.html (cards + JSON-LD generated from one product list). Re-runnable; edit PRODUCTS to change prices."""
-import json, os
+import json, os, html as H
 SQ='https://threetinybrushes.square.site'
 DOMAIN='https://threetinybrushes.com/'
 PRODUCTS=[ # name, short, subtitle, full name on Square, price(s), path
@@ -33,6 +33,19 @@ PARTY_PACKS=[ # design name, image base, alt text
  ('Princess &amp; Castle','party-princess-castle','Princess &amp; Castle party pack: a paintable princess, castle and crown with three paint pots and a brush'),
 ]
 PARTY_BDAY=('party-happy-birthday','Happy Birthday party pack: a paintable cake, present, party hat and &ldquo;Happy Birthday&rdquo; plaque with three paint pots and a brush')
+# Made-to-order / lead time (approved by Rachel 10/10). Short line in Shop + party packs; full text in the FAQ.
+MADE_SHORT='Hand poured and made to order. Please allow at least 3 days before your order is ready.'
+MADE_FULL='Every piece is hand poured and made to order, so please allow at least 3 days before your order is ready. Because each one is handmade from plaster, no two are exactly alike, and a tiny imperfection here or there is part of the charm.'
+# FAQ: (question, answer as plain text). Rendered as <details> + FAQPage JSON-LD.
+FAQ=[
+ ('How long until my order is ready?',MADE_FULL),
+ ('How do I personalize a name kit?','Type your child&rsquo;s name and pick the size when you order: 3&ndash;5 letters $18, 6&ndash;8 letters $20.'),
+ ('Can I pick up locally?','Yes. Choose pickup or shipping at checkout. Pickup is at Orange Otter Toys, 507 Georgia Ave, Suite A, North Augusta, SC 29841, and we ship nationwide.'),
+ ('Is the paint washable?','Yes. Every kit comes with high-quality, washable, non-toxic paint.'),
+]
+# REVIEWS: real customer quotes only (never invent). Each: {'quote': ..., 'name': ..., 'detail': ...} (detail optional, e.g. 'Unicorn Wishes kit').
+# While empty, the Reviews section is not rendered at all (no placeholder, no schema).
+REVIEWS=[]
 # All name kits share the same Square setup: required name field + two size options ($18 / $20).
 NAME_PROMPT='Please enter the name you would like to order'
 NAME_SIZES='3–5 letters $18 · 6–8 letters $20'
@@ -68,6 +81,9 @@ for name,short,sub,full,prices,path,alt in PRODUCTS:
     else:
         offers={"@type":"AggregateOffer","lowPrice":"%.2f"%prices[0],"highPrice":"%.2f"%prices[1],"priceCurrency":"USD","offerCount":2,"url":SQ+path}
     ld_products.append({"@type":"Product","name":full,"image":f"{DOMAIN}img/{short}-1600.jpg","description":alt[0].upper()+alt[1:]+".","brand":{"@type":"Brand","name":"Three Tiny Brushes"},"url":SQ+path,"offers":offers})
+import re
+_txt=lambda x:H.unescape(re.sub('<[^>]+>','',x))
+ld_faq={"@type":"FAQPage","@id":DOMAIN+"#faq","mainEntity":[{"@type":"Question","name":_txt(q),"acceptedAnswer":{"@type":"Answer","text":_txt(a)}} for q,a in FAQ]}
 ld={"@context":"https://schema.org","@graph":[
  {"@type":"Store","@id":DOMAIN+"#store","name":"Three Tiny Brushes","url":DOMAIN,"logo":DOMAIN+"img/logo-128.png","image":DOMAIN+"img/og.jpg",
   "description":DESC,
@@ -75,12 +91,24 @@ ld={"@context":"https://schema.org","@graph":[
   "email":EMAIL,"sameAs":[IG,FB,SQ+"/"],
   "address":{"@type":"PostalAddress","name":"Orange Otter Toys (pickup location)","streetAddress":"507 Georgia Ave, Suite A","addressLocality":"North Augusta","addressRegion":"SC","postalCode":"29841","addressCountry":"US"},
   "makesOffer":[{"@type":"Offer","itemOffered":{"@id":DOMAIN+"#"+p[1]}} for p in PRODUCTS]}
-]+[dict(ld_products[i],**{"@id":DOMAIN+"#"+PRODUCTS[i][1]}) for i in range(5)]}
+]+[dict(ld_products[i],**{"@id":DOMAIN+"#"+PRODUCTS[i][1]}) for i in range(5)]+[ld_faq]}
 ppic=lambda base,alt,sizes:pic(base,alt,sizes,w=600,h=800,variants=(600,1000),src_w=600)
 PARTY_SIZES="(min-width:1160px) 245px, (min-width:760px) calc((100vw - 182px) / 4), calc((100vw - 86px) / 2)"
 party_items='\n'.join(f'''  <li><figure>{ppic(base,alt,PARTY_SIZES)}<figcaption>{name}</figcaption></figure></li>''' for name,base,alt in PARTY_PACKS)
 party_items+=f'''\n  <li class="bday"><figure><div class="pp-img">{ppic(PARTY_BDAY[0],PARTY_BDAY[1],PARTY_SIZES)}<span class="pp-price"><span class="visually-hidden">Price: </span>{PARTY_BDAY_PRICE}</span></div><figcaption>{PARTY_BDAY_NAME}<span class="pp-note">{PARTY_BDAY_NOTE}</span></figcaption></figure></li>'''
 party_tiers=' <span class="dot" aria-hidden="true">·</span> '.join(f'<span class="tier"><b>{p}</b> {t}</span>' for p,t in PARTY_PRICES)
+faq_items='\n'.join(f'  <details class="card faq-item"><summary>{q}</summary><p>{a}</p></details>' for q,a in FAQ)
+def _rev(r):
+    d=f'<span class="rev-detail">{H.escape(r["detail"])}</span>' if r.get('detail') else ''
+    return f'  <li class="card review"><blockquote><p>&ldquo;{H.escape(r["quote"])}&rdquo;</p></blockquote><p class="rev-name">{H.escape(r["name"])}{d}</p></li>'
+REVIEWS_HTML=(f'''<section class="reviews" id="reviews" aria-labelledby="reviews-title"><div class="wrap">
+ <p class="kicker">Reviews</p><h2 id="reviews-title">What parents are saying</h2>
+ <ul class="rev-grid">
+{chr(10).join(_rev(r) for r in REVIEWS)}
+ </ul>
+</div></section>
+
+''' if REVIEWS else '')
 FONTS='https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&amp;family=Quicksand:wght@700&amp;display=swap'
 html=f'''<!doctype html>
 <html lang="en">
@@ -151,6 +179,7 @@ html=f'''<!doctype html>
 <section id="shop" aria-labelledby="shop-title"><div class="wrap">
  <p class="kicker">Shop kits</p><h2 id="shop-title">Pick a kit</h2>
  <p class="sub">Name kits are personalized with your child's name. Don't forget to enter the name (and pick a size) when you order. Big Bro and Big Sis kits are ready to go.</p>
+ <p class="made-note"><span aria-hidden="true">🤍</span> {MADE_SHORT}</p>
  <ul class="grid5">
 {chr(10).join(cards)}
  </ul>
@@ -170,6 +199,7 @@ html=f'''<!doctype html>
    <p class="tiers-label">Seven designs</p>
    <p class="tiers" aria-label="Party pack pricing for the seven designs">{party_tiers}</p>
    <p class="bday-price">Happy Birthday pack: <b>{PARTY_BDAY_PRICE}</b> (free with 15+ party packs)</p>
+   <p class="made-note sm">{MADE_SHORT}</p>
    <div class="row"><a class="btn btn-p" href="{PARTY_SHOP_URL}">Shop party packs</a><a class="btn btn-s" href="{MAIL_PACKS}">Ask about party packs</a></div>
   </div>
   <div class="card party-promo">
@@ -234,6 +264,13 @@ html=f'''<!doctype html>
  <p class="sub lead-local">We&rsquo;re a local Augusta / North Augusta shop &mdash; pick up at Orange Otter Toys, or we ship nationwide.</p>
  <p class="sub">Just choose pickup or shipping at checkout.</p>
  <address class="card addr"><strong><span aria-hidden="true">📍</span> Orange Otter Toys</strong>507 Georgia Ave, Suite A<br>North Augusta, SC 29841</address></div>
+</div></section>
+
+{REVIEWS_HTML}<section class="faq" id="faq" aria-labelledby="faq-title"><div class="wrap">
+ <p class="kicker">Good to know</p><h2 id="faq-title">Questions, answered</h2>
+ <div class="faq-list">
+{faq_items}
+ </div>
 </div></section>
 
 <section class="news" id="loop" aria-labelledby="loop-title"><div class="wrap">

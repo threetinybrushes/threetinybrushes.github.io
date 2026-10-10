@@ -189,3 +189,23 @@ section{padding:64px 0;scroll-margin-top:72px}
  .party-promo .deal{align-self:end}
  .party-promo .offer{font-size:19px}
 }
+/* Made-to-order note (Shop + party packs) */
+.made-note{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:8px 14px;border-radius:14px;background:var(--lav-t);color:var(--lav-deep);font-weight:800;font-size:15px;line-height:1.35}
+.made-note.sm{display:block;background:none;padding:0;margin-top:14px;color:var(--muted);font-size:14px}
+/* FAQ */
+.faq{background:#fff}
+.faq-list{display:grid;gap:12px;margin-top:26px;max-width:760px}
+.faq-item{background:var(--cream);padding:0}
+.faq-item summary{cursor:pointer;padding:18px 22px;font-family:var(--head);font-weight:700;font-size:18px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+";color:var(--pink-text);font-size:22px;line-height:1}
+.faq-item[open] summary::after{content:"–"}
+.faq-item p{padding:0 22px 20px;color:#524A6A;font-size:17px}
+/* Reviews (renders only when REVIEWS has entries) */
+.rev-grid{display:grid;gap:18px;margin-top:28px;list-style:none}
+.review{padding:24px;display:flex;flex-direction:column;gap:14px;border-top:6px solid var(--pink)}
+.review:nth-child(3n+2){border-top-color:var(--mint)}.review:nth-child(3n){border-top-color:var(--lav)}
+.review blockquote p{font-size:17px;line-height:1.5;color:var(--ink)}
+.rev-name{margin-top:auto;font-weight:900;color:var(--pink-text)}
+.rev-detail{display:block;font-weight:700;font-size:14px;color:var(--muted)}
+@media (min-width:760px){.rev-grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}}
