@@ -1,0 +1,27 @@
+# Builds the hero collage (2 name kits + 2 party packs, Oct 12 2026) -> site-revamp/images/hero-kits-collage.jpg; then resize to img/hero-kits-{560,800,1100}.
+from PIL import Image,ImageDraw,ImageFilter
+S='/workspace/threetinybrushes/site-revamp/images/';P='/workspace/threetinybrushes/incoming/2026-10-06-party-packs/'
+old=Image.open(S+'hero-kits-collage.jpg').convert('RGB');bg=old.getpixel((10,10))
+W,H=1400,1310;c=Image.new('RGBA',(W,H),bg+(255,))
+def card(path,w,h,crop=None,border=22,r=44):
+    im=Image.open(path).convert('RGB')
+    if crop: im=im.crop(crop)
+    iw,ih=w-2*border,h-2*border
+    s=max(iw/im.width,ih/im.height);im=im.resize((round(im.width*s),round(im.height*s)),Image.LANCZOS)
+    l=(im.width-iw)//2;t=(im.height-ih)//2;im=im.crop((l,t,l+iw,t+ih))
+    cd=Image.new('RGBA',(w,h),(0,0,0,0));m=Image.new('L',(w,h));ImageDraw.Draw(m).rounded_rectangle((0,0,w-1,h-1),r,fill=255)
+    cd.paste((255,255,255,255),(0,0),m)
+    m2=Image.new('L',(iw,ih));ImageDraw.Draw(m2).rounded_rectangle((0,0,iw-1,ih-1),r-14,fill=255)
+    cd.paste(im,(border,border),m2);return cd
+def place(cd,x,y,ang):
+    cd=cd.rotate(ang,Image.BICUBIC,expand=True)
+    m=Image.new('L',(W,H));m.paste(cd.split()[3].point(lambda v:int(v*0.28)),(x+6,y+24))
+    m=m.filter(ImageFilter.GaussianBlur(22));sh=Image.new('RGBA',(W,H),(120,60,90,255));sh.putalpha(m)
+    c.alpha_composite(sh);c.alpha_composite(cd,(x,y))
+# name kits: crop to the package area (pkg ~145..895 x 225..785 of 1024 scale on 1600 -> *1.5625)
+k=lambda a:(int(a[0]*1.5625),int(a[1]*1.5625),int(a[2]*1.5625),int(a[3]*1.5625))
+place(card(S+'unicorn-wishes-personalized-paintable-name-kit.jpg',640,560,k((70,150,970,880))),60,80,4)
+place(card(S+'dino-mite-personalized-paintable-name-kit.jpg',620,545,k((70,150,970,880))),690,170,-4)
+place(card(P+'party-pack-1.png',400,530),200,620,-5)
+place(card(P+'happy-birthday-pack.png',400,530),740,670,5)
+c.convert('RGB').save('hero-kits-collage.jpg',quality=92)

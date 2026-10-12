@@ -172,7 +172,7 @@ html=f'''<!doctype html>
     <li class="pill" style="background:var(--lav-t)"><span aria-hidden="true">📦</span> Shipping</li>
    </ul>
   </div>
-  <div class="hero-img">{pic("hero-kits","Three personalized paint name kits in white frames: Reese unicorn kit, Henry dino kit and James donut kit","(min-width:1160px) 480px, (min-width:900px) 40vw, (min-width:600px) 560px, calc(100vw - 40px)",lazy=False,w=1400,h=1310,variants=(560,800,1100))}</div>
+  <div class="hero-img">{pic("hero-kits","Personalized paint name kits for Reese (unicorn) and Henry (dino), plus Unicorn &amp; Rainbow and Happy Birthday party packs","(min-width:1160px) 480px, (min-width:900px) 40vw, (min-width:600px) 560px, calc(100vw - 40px)",lazy=False,w=1400,h=1310,variants=(560,800,1100))}</div>
  </div>
 </div>
 
