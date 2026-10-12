@@ -166,7 +166,7 @@ html=f'''<!doctype html>
    <p class="sub">Kids' paint kits, including name kits made with your child's name. Local pickup in North Augusta or shipping.</p>
    <div class="row"><a class="btn btn-p" href="{SQ}/">Shop the kits</a><a class="btn btn-s" href="#pickup">Pickup &amp; shipping</a></div>
    <ul class="pills" aria-label="Highlights">
-    <li class="pill" style="background:var(--pink-t)"><span aria-hidden="true">🎨</span> Personalized name kits</li>
+    <li class="pill" style="background:var(--pink-t)"><span aria-hidden="true">🎨</span> Name kits, sibling kits &amp; party packs</li>
     <li class="pill" style="background:var(--mint-t)"><span aria-hidden="true">🧼</span> Washable paint</li>
     <li class="pill" style="background:var(--mint-t)"><span aria-hidden="true">📍</span> Local pickup</li>
     <li class="pill" style="background:var(--lav-t)"><span aria-hidden="true">📦</span> Shipping</li>
@@ -189,12 +189,14 @@ html=f'''<!doctype html>
 <section class="party" id="party-packs" aria-labelledby="party-title"><div class="wrap">
  <p class="kicker">For birthdays &amp; class parties</p><h2 id="party-title">Party packs</h2>
  <p class="sub">Paint-it-yourself packs for every kid at the party. Each pack has paintable figures, three washable, non-toxic paints and a brush. Ages 3+.</p>
+ <p class="single-note"><b>Buy just one, or grab a bunch for the party.</b> 1 pack $8 &middot; 5+ $6 each &middot; 20+ $5 each</p>
  <ul class="party-grid" aria-label="Party pack designs">
 {party_items}
  </ul>
  <div class="party-buy">
   <div class="card party-price">
    <h3>Pricing</h3>
+   <p class="single-note sm">No minimum: buy a single pack or a bunch.</p>
    <p class="range-price"><span class="visually-hidden">Price range: </span>$5 to $10</p>
    <p class="tiers-label">Seven designs</p>
    <p class="tiers" aria-label="Party pack pricing for the seven designs">{party_tiers}</p>
