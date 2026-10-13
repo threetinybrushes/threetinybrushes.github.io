@@ -1,4 +1,4 @@
-# Builds the hero collage (Reese + Henry name kits, Big Bro kit, Unicorn & Rainbow + Happy Birthday party packs; overlapping layout, Oct 12 2026) -> site-revamp/images/hero-kits-collage.jpg; then resize to img/hero-kits-{560,800,1100}.
+# Builds the hero collage (Reese + Henry name kits, Big Bro kit, Unicorn & Rainbow + Happy Birthday party packs; overlapping layout v4, bottom row Unicorn pack / Big Bro / Happy Birthday, Oct 12 2026) -> site-revamp/images/hero-kits-collage.jpg; then resize to img/hero-kits-{560,800,1100}.
 from PIL import Image,ImageDraw,ImageFilter
 S='/workspace/threetinybrushes/site-revamp/images/';P='/workspace/threetinybrushes/incoming/2026-10-06-party-packs/'
 old=Image.open(S+'hero-kits-collage.jpg').convert('RGB');bg=old.getpixel((10,10))
@@ -20,9 +20,9 @@ def place(cd,x,y,ang):
     c.alpha_composite(sh);c.alpha_composite(cd,(x,y))
 # name kits: crop to the package area (pkg ~145..895 x 225..785 of 1024 scale on 1600 -> *1.5625)
 k=lambda a:(int(a[0]*1.5625),int(a[1]*1.5625),int(a[2]*1.5625),int(a[3]*1.5625))
-place(card(S+'big-bro-paint-kit.jpg',600,525,k((70,150,970,880))),40,640,-3)
-place(card(S+'unicorn-wishes-personalized-paintable-name-kit.jpg',640,560,k((70,150,970,880))),50,80,4)
-place(card(S+'dino-mite-personalized-paintable-name-kit.jpg',630,550,k((70,150,970,880))),700,110,-4)
-place(card(P+'happy-birthday-pack.png',390,515),985,650,6)
-place(card(P+'party-pack-1.png',390,515),595,700,-4)
+place(card(S+'unicorn-wishes-personalized-paintable-name-kit.jpg',640,560,k((70,150,970,880))),40,60,3)
+place(card(S+'dino-mite-personalized-paintable-name-kit.jpg',640,560,k((70,150,970,880))),700,75,-3)
+place(card(P+'party-pack-1.png',410,545),45,650,-5)
+place(card(P+'happy-birthday-pack.png',410,545),945,650,5)
+place(card(S+'big-bro-paint-kit.jpg',560,490,k((70,150,970,880))),420,700,0)
 c.convert('RGB').save('hero-kits-collage.jpg',quality=92)
