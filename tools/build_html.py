@@ -49,7 +49,7 @@ REVIEWS=[]
 # All name kits share the same Square setup: required name field + two size options ($18 / $20).
 NAME_PROMPT='Please enter the name you would like to order'
 NAME_SIZES='3–5 letters $18 · 6–8 letters $20'
-DESC="Paint-your-own kits for kids: name kits personalized with your child's name, plus party packs for birthdays. Local pickup in North Augusta, SC or shipping nationwide."
+DESC="Hand-poured, personalized paint-your-own plaster kits for kids. Pickup in North Augusta, SC or shipping nationwide."
 # Dino photo: img/dino-mite-{400,600,800,1600}.{jpg,webp}, used by the Dino-Mite shop card and the pickup section.
 # To swap it, replace those 8 files (or rerun tools/make_images.py with a new source) and rerun this script.
 fmt=lambda p:'$%.2f'%p
@@ -249,8 +249,7 @@ html=f'''<!doctype html>
 <section class="story" id="story" aria-labelledby="story-title"><div class="wrap story-in">
  <div class="story-logo"><picture><source type="image/webp" srcset="img/logo-240.webp 1x, img/logo-480.webp 2x"><img src="img/logo-240.png" srcset="img/logo-240.png 1x, img/logo-480.png 2x" width="240" height="240" alt="Three Tiny Brushes logo: three paintbrushes in pink, mint and lavender" loading="lazy" decoding="async"></picture></div>
  <div><p class="kicker">A family project</p><h2 id="story-title">Our story</h2>
- <p>Three Tiny Brushes began when our oldest daughter was just six years old. She came to me with a sweet idea: she wanted to start a craft business with her two little sisters. We&rsquo;ve always loved crafting together and making special things for the people we love, so dreaming up craft kits to share felt like a natural next step.</p>
- <p>Together, we designed our logo with three tiny brushes&mdash;one for each of our girls, in their favorite color. Every kit is created and packaged by hand and holds a little piece of our family&rsquo;s love of crafting, ready to bring joy to your tiny artist.</p></div>
+ <p>Three Tiny Brushes began when our oldest daughter came to me with a sweet idea: she wanted to start a craft business with her two little sisters.</p></div>
 </div></section>
 
 <section id="siblings" aria-labelledby="sib-title"><div class="wrap split">
