@@ -69,7 +69,7 @@ for name,short,sub,full,prices,path,alt in PRODUCTS:
     sr=f' to {fmt(prices[1])}' if len(prices)>1 else ''
     opts=f'\n   <p class="opts">Add their name · {NAME_SIZES}</p>' if sub=='Personalized name kit' else ''
     cards.append(f'''  <li class="card prod">
-   {pic(short,alt,"(min-width:1160px) 196px, (min-width:1040px) 17vw, (min-width:600px) 30vw, 44vw")}
+   <a class="img-link" href="{SQ}{path}" aria-label="Shop {name} on our Square shop">{pic(short,alt,"(min-width:1160px) 196px, (min-width:1040px) 17vw, (min-width:600px) 30vw, 44vw")}</a>
    <h3>{name}</h3><span class="type">{sub}</span>
    <p class="price"><span class="visually-hidden">Price: </span>{price}</p>{opts}
    <a class="btn btn-p btn-sm" href="{SQ}{path}" aria-label="Shop {name} on our Square shop">Shop</a>
@@ -94,8 +94,8 @@ ld={"@context":"https://schema.org","@graph":[
 ]+[dict(ld_products[i],**{"@id":DOMAIN+"#"+PRODUCTS[i][1]}) for i in range(5)]+[ld_faq]}
 ppic=lambda base,alt,sizes:pic(base,alt,sizes,w=600,h=800,variants=(600,1000),src_w=600)
 PARTY_SIZES="(min-width:1160px) 245px, (min-width:760px) calc((100vw - 182px) / 4), calc((100vw - 86px) / 2)"
-party_items='\n'.join(f'''  <li><figure>{ppic(base,alt,PARTY_SIZES)}<figcaption>{name}</figcaption></figure></li>''' for name,base,alt in PARTY_PACKS)
-party_items+=f'''\n  <li class="bday"><figure><div class="pp-img">{ppic(PARTY_BDAY[0],PARTY_BDAY[1],PARTY_SIZES)}<span class="pp-price"><span class="visually-hidden">Price: </span>{PARTY_BDAY_PRICE}</span></div><figcaption>{PARTY_BDAY_NAME}<span class="pp-note">{PARTY_BDAY_NOTE}</span></figcaption></figure></li>'''
+party_items='\n'.join(f'''  <li><figure><a class="img-link" href="{PARTY_SHOP_URL}" aria-label="Shop the {name} party pack">{ppic(base,alt,PARTY_SIZES)}</a><figcaption>{name}</figcaption></figure></li>''' for name,base,alt in PARTY_PACKS)
+party_items+=f'''\n  <li class="bday"><figure><div class="pp-img"><a class="img-link" href="{PARTY_SHOP_URL}" aria-label="Shop the Happy Birthday party pack">{ppic(PARTY_BDAY[0],PARTY_BDAY[1],PARTY_SIZES)}</a><span class="pp-price"><span class="visually-hidden">Price: </span>{PARTY_BDAY_PRICE}</span></div><figcaption>{PARTY_BDAY_NAME}<span class="pp-note">{PARTY_BDAY_NOTE}</span></figcaption></figure></li>'''
 party_tiers=' <span class="dot" aria-hidden="true">·</span> '.join(f'<span class="tier"><b>{p}</b> {t}</span>' for p,t in PARTY_PRICES)
 faq_items='\n'.join(f'  <details class="card faq-item"><summary>{q}</summary><p>{a}</p></details>' for q,a in FAQ)
 def _rev(r):
@@ -172,7 +172,7 @@ html=f'''<!doctype html>
     <li class="pill" style="background:var(--lav-t)"><span aria-hidden="true">📦</span> Shipping</li>
    </ul>
   </div>
-  <div class="hero-img">{pic("hero-kits","Personalized paint name kits for Reese (unicorn) and Henry (dino), a Big Bro paint kit, plus Unicorn &amp; Rainbow and Happy Birthday party packs","(min-width:1160px) 480px, (min-width:900px) 40vw, (min-width:600px) 560px, calc(100vw - 40px)",lazy=False,w=1400,h=1310,variants=(560,800,1100))}</div>
+  <div class="hero-img"><a class="img-link" href="{SQ}/" aria-label="Shop all kits on our Square shop">{pic("hero-kits","Personalized paint name kits for Reese (unicorn) and Henry (dino), a Big Bro paint kit, plus Unicorn &amp; Rainbow and Happy Birthday party packs","(min-width:1160px) 480px, (min-width:900px) 40vw, (min-width:600px) 560px, calc(100vw - 40px)",lazy=False,w=1400,h=1310,variants=(560,800,1100))}</a></div>
  </div>
 </div>
 
@@ -206,7 +206,7 @@ html=f'''<!doctype html>
   </div>
   <div class="card party-promo">
    <p class="pill deal"><span aria-hidden="true">🎁</span> {PARTY_PILL}</p>
-   <div class="promo-img">{ppic(PARTY_BDAY[0],PARTY_BDAY[1],"(min-width:760px) 180px, 110px")}</div>
+   <div class="promo-img"><a class="img-link" href="{PARTY_SHOP_URL}" aria-label="Shop the Happy Birthday party pack">{ppic(PARTY_BDAY[0],PARTY_BDAY[1],"(min-width:760px) 180px, 110px")}</a></div>
    <div class="promo-text">
     <p class="offer">{PARTY_PROMO}</p>
     <p class="promo-note">Your free pack: a cake, present, party hat and &ldquo;Happy Birthday&rdquo; plaque to paint.</p>
@@ -250,19 +250,18 @@ html=f'''<!doctype html>
  <div class="story-logo"><picture><source type="image/webp" srcset="img/logo-240.webp 1x, img/logo-480.webp 2x"><img src="img/logo-240.png" srcset="img/logo-240.png 1x, img/logo-480.png 2x" width="240" height="240" alt="Three Tiny Brushes logo: three paintbrushes in pink, mint and lavender" loading="lazy" decoding="async"></picture></div>
  <div><p class="kicker">A family project</p><h2 id="story-title">Our story</h2>
  <p>Three Tiny Brushes began when our oldest daughter came to me with a sweet idea: she wanted to start a craft business with her two little sisters. We&rsquo;ve always loved crafting together and making special things for the people we love, so dreaming up craft kits to share felt like a natural next step.</p>
- <p>Together, we designed our logo with three tiny brushes&mdash;one for each of our girls, in their favorite color. Every kit is created and packaged by hand and holds a little piece of our family&rsquo;s love of crafting, ready to bring joy to your tiny artist.</p>
- <figure class="story-fam"><picture><source type="image/webp" srcset="img/our-family-240.webp 1x, img/our-family-480.webp 2x"><img src="img/our-family-240.png" srcset="img/our-family-240.png 1x, img/our-family-480.png 2x" width="240" height="246" alt="Silhouette illustration of a mom holding her baby girl, with her two older daughters beside her" loading="lazy" decoding="async"></picture></figure></div>
+ <p>Together, we designed our logo with three tiny brushes&mdash;one for each of our girls, in their favorite color. Every kit is created and packaged by hand and holds a little piece of our family&rsquo;s love of crafting, ready to bring joy to your tiny artist.</p></div>
 </div></section>
 
 <section id="siblings" aria-labelledby="sib-title"><div class="wrap split">
- <div class="polaroid-wrap">{pic("big-sis","Big Sis paint kit","(min-width:1160px) 460px, (min-width:760px) 40vw, calc(100vw - 40px)",cls="polaroid tilt-l")}</div>
+ <div class="polaroid-wrap"><a class="img-link" href="{SQ}{PRODUCTS[4][5]}" aria-label="Shop the Big Sis paint kit">{pic("big-sis","Big Sis paint kit","(min-width:1160px) 460px, (min-width:760px) 40vw, calc(100vw - 40px)",cls="polaroid tilt-l")}</a></div>
  <div><p class="kicker">Sibling kits</p><h2 id="sib-title">For the new<br><span class="accent">big brother or big sister</span></h2>
  <p class="sub">Our Big Bro and Big Sis paint kits give older siblings something of their own to paint.</p>
  <div class="row"><a class="btn btn-p" href="{SQ}{PRODUCTS[4][5]}">Shop Big Sis</a><a class="btn btn-s" href="{SQ}{PRODUCTS[3][5]}">Shop Big Bro</a></div></div>
 </div></section>
 
 <section class="pickup" id="pickup" aria-labelledby="pickup-title"><div class="wrap split rev">
- <div class="polaroid-wrap">{pic("dino-mite","Dino-Mite personalized paint-your-own name kit","(min-width:1160px) 460px, (min-width:760px) 40vw, calc(100vw - 40px)",cls="polaroid tilt-r")}</div>
+ <div class="polaroid-wrap"><a class="img-link" href="{SQ}{[x[5] for x in PRODUCTS if x[1]=='dino-mite'][0]}" aria-label="Shop the Dino-Mite name kit">{pic("dino-mite","Dino-Mite personalized paint-your-own name kit","(min-width:1160px) 460px, (min-width:760px) 40vw, calc(100vw - 40px)",cls="polaroid tilt-r")}</a></div>
  <div><p class="kicker">Pickup &amp; shipping</p><h2 id="pickup-title">Pick up locally or get it shipped</h2>
  <p class="sub lead-local">We&rsquo;re a local Augusta / North Augusta shop &mdash; pick up at Orange Otter Toys, or we ship nationwide.</p>
  <p class="sub">Just choose pickup or shipping at checkout.</p>
