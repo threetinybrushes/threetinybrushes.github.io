@@ -211,3 +211,4 @@ section{padding:64px 0;scroll-margin-top:72px}
 .rev-name{margin-top:auto;font-weight:900;color:var(--pink-text)}
 .rev-detail{display:block;font-weight:700;font-size:14px;color:var(--muted)}
 @media (min-width:760px){.rev-grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}}
+.story-fam{margin-top:18px;max-width:150px}.story-fam img{width:100%;height:auto;display:block}
