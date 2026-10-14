@@ -69,10 +69,10 @@ for name,short,sub,full,prices,path,alt in PRODUCTS:
     sr=f' to {fmt(prices[1])}' if len(prices)>1 else ''
     opts=f'\n   <p class="opts">Add their name · {NAME_SIZES}</p>' if sub=='Personalized name kit' else ''
     cards.append(f'''  <li class="card prod">
-   <a class="img-link" href="{SQ}{path}" aria-label="Shop {name} on our Square shop">{pic(short,alt,"(min-width:1160px) 196px, (min-width:1040px) 17vw, (min-width:600px) 30vw, 44vw")}</a>
+   {pic(short,alt,"(min-width:1160px) 196px, (min-width:1040px) 17vw, (min-width:600px) 30vw, 44vw")}
    <h3>{name}</h3><span class="type">{sub}</span>
    <p class="price"><span class="visually-hidden">Price: </span>{price}</p>{opts}
-   <a class="btn btn-p btn-sm" href="{SQ}{path}" aria-label="Shop {name} on our Square shop">Shop</a>
+   <a class="btn btn-p btn-sm card-link" href="{SQ}{path}" aria-label="Shop {name} on our Square shop">Shop</a>
   </li>''')
 ld_products=[]
 for name,short,sub,full,prices,path,alt in PRODUCTS:
