@@ -45,7 +45,7 @@ FAQ=[
 ]
 # REVIEWS: real customer quotes only (never invent). Each: {'quote': ..., 'name': ..., 'detail': ...} (detail optional, e.g. 'Unicorn Wishes kit').
 # While empty, the Reviews section is not rendered at all (no placeholder, no schema).
-REVIEWS=[]
+REVIEWS=[{'quote':'We chose Three Tiny Brushes for the party favors at our daughter’s 3rd birthday, and they were such a perfect fit for our colorful celebration! The kits were adorable, thoughtfully packaged, and gave each child a creative activity to enjoy at home.','name':'Kadie'}]  # sent by Rachel 10/14 (verbatim customer wording; keep 'party favors' as she wrote it)
 # All name kits share the same Square setup: required name field + two size options ($18 / $20).
 NAME_PROMPT='Please enter the name you would like to order'
 NAME_SIZES='3–5 letters $18 · 6–8 letters $20'
@@ -100,7 +100,7 @@ party_tiers=' <span class="dot" aria-hidden="true">·</span> '.join(f'<span clas
 faq_items='\n'.join(f'  <details class="card faq-item"><summary>{q}</summary><p>{a}</p></details>' for q,a in FAQ)
 def _rev(r):
     d=f'<span class="rev-detail">{H.escape(r["detail"])}</span>' if r.get('detail') else ''
-    return f'  <li class="card review"><blockquote><p>&ldquo;{H.escape(r["quote"])}&rdquo;</p></blockquote><p class="rev-name">{H.escape(r["name"])}{d}</p></li>'
+    return f'  <li class="card review"><blockquote><p>&ldquo;{H.escape(r["quote"])}&rdquo;</p></blockquote><p class="rev-name">&mdash; {H.escape(r["name"])}{d}</p></li>'
 # CUSTOMER_PHOTOS: real photos sent by Rachel (never stock). Shown in the "From our customers" section.
 CUSTOMER_PHOTOS=[('customer-party','Party packs for a friend\'s celebration','A birthday table with a donut tower, a pink number 3 and Three Tiny Brushes party packs in the foreground')]
 # To add Rachel's real quote later, put it in REVIEWS above (quote + first name); it will appear under the photo here.
