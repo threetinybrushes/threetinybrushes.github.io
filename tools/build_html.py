@@ -104,7 +104,7 @@ def _rev(r):
 # CUSTOMER_PHOTOS: real photos sent by Rachel (never stock). Shown in the "From our customers" section.
 CUSTOMER_PHOTOS=[('customer-party','Party packs for a friend\'s celebration','A birthday table with a donut tower, a pink number 3 and Three Tiny Brushes party packs in the foreground')]
 # To add Rachel's real quote later, put it in REVIEWS above (quote + first name); it will appear under the photo here.
-_cp=lambda b,cap,alt: f'''  <figure class="cust-photo"><a class="img-link" href="{PARTY_SHOP_URL}" aria-label="Shop party packs on our Square shop">{pic(b,alt,"(min-width:760px) 420px, calc(100vw - 40px)",w=1000,h=1253,variants=(600,1000,1400),src_w=1000)}</a><figcaption>{cap}</figcaption></figure>'''
+_cp=lambda b,cap,alt: f'''  <figure class="cust-photo"><a class="img-link" href="{PARTY_SHOP_URL}" aria-label="Shop party packs on our Square shop">{pic(b,alt,"(min-width:760px) 300px, min(300px, calc(100vw - 40px))",w=1000,h=1253,variants=(600,1000,1400),src_w=1000)}</a><figcaption>{cap}</figcaption></figure>'''
 REVIEWS_HTML=(f'''<section class="reviews" id="reviews" aria-labelledby="reviews-title"><div class="wrap">
  <p class="kicker">Happy customers</p><h2 id="reviews-title">From our customers</h2>
 {chr(10).join(_cp(*c) for c in CUSTOMER_PHOTOS)}
