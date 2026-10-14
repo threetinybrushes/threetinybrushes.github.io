@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://threetinybrushes.github.io/sitemap.xml
+Sitemap: https://threetinybrushes.com/sitemap.xml

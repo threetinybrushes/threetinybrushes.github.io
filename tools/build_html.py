@@ -1,7 +1,7 @@
 """Writes index.html (cards + JSON-LD generated from one product list). Re-runnable; edit PRODUCTS to change prices."""
 import json, os, html as H
 SQ='https://threetinybrushes.square.site'
-DOMAIN='https://threetinybrushes.github.io/'  # live URL until the threetinybrushes.com domain is switched (Drew's OK); then change back + robots.txt/sitemap.xml
+DOMAIN='https://threetinybrushes.com/'
 PRODUCTS=[ # name, short, subtitle, full name on Square, price(s), path
  ('Unicorn Wishes','unicorn-wishes','Personalized name kit','Unicorn Wishes Personalized Paintable Name Kit',(18,20),'/product/unicorn-wishes-personalized-paintable-name-kit/DJL3EIU2E24Y5KIVT3AFHHFQ','Unicorn Wishes personalized paint-your-own name kit'),
  ('Dino-Mite','dino-mite','Personalized name kit','Dino-Mite Personalized Paintable Name Kit',(18,20),'/product/dino-mite-personalized-paintable-name-kit/X7LNKIWP7Z5QSPDV2MBJVYXO','Dino-Mite personalized paint-your-own name kit'),
