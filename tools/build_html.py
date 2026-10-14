@@ -101,14 +101,19 @@ faq_items='\n'.join(f'  <details class="card faq-item"><summary>{q}</summary><p>
 def _rev(r):
     d=f'<span class="rev-detail">{H.escape(r["detail"])}</span>' if r.get('detail') else ''
     return f'  <li class="card review"><blockquote><p>&ldquo;{H.escape(r["quote"])}&rdquo;</p></blockquote><p class="rev-name">{H.escape(r["name"])}{d}</p></li>'
+# CUSTOMER_PHOTOS: real photos sent by Rachel (never stock). Shown in the "From our customers" section.
+CUSTOMER_PHOTOS=[('customer-party','Party packs for a friend\'s celebration','A birthday table with a donut tower, a pink number 3 and Three Tiny Brushes party packs in the foreground')]
+# To add Rachel's real quote later, put it in REVIEWS above (quote + first name); it will appear under the photo here.
+_cp=lambda b,cap,alt: f'''  <figure class="cust-photo"><a class="img-link" href="{PARTY_SHOP_URL}" aria-label="Shop party packs on our Square shop">{pic(b,alt,"(min-width:760px) 420px, calc(100vw - 40px)",w=1000,h=1253,variants=(600,1000,1400),src_w=1000)}</a><figcaption>{cap}</figcaption></figure>'''
 REVIEWS_HTML=(f'''<section class="reviews" id="reviews" aria-labelledby="reviews-title"><div class="wrap">
- <p class="kicker">Reviews</p><h2 id="reviews-title">What parents are saying</h2>
- <ul class="rev-grid">
+ <p class="kicker">Happy customers</p><h2 id="reviews-title">From our customers</h2>
+{chr(10).join(_cp(*c) for c in CUSTOMER_PHOTOS)}
+'''+(f''' <ul class="rev-grid">
 {chr(10).join(_rev(r) for r in REVIEWS)}
  </ul>
-</div></section>
+''' if REVIEWS else '')+'''</div></section>
 
-''' if REVIEWS else '')
+''' if (REVIEWS or CUSTOMER_PHOTOS) else '')
 FONTS='https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&amp;family=Quicksand:wght@700&amp;display=swap'
 html=f'''<!doctype html>
 <html lang="en">
@@ -215,6 +220,8 @@ html=f'''<!doctype html>
  </div>
 </div></section>
 
+{REVIEWS_HTML}
+
 <section class="more" id="more" aria-labelledby="more-title"><div class="wrap">
  <p class="kicker">More to paint</p><h2 id="more-title">Not just name kits</h2>
  <p class="sub">Seasonal kits are on the way, and party packs are ready for your next celebration. Have something in mind? Just ask.</p>
@@ -268,7 +275,7 @@ html=f'''<!doctype html>
  <address class="card addr"><strong><span aria-hidden="true">📍</span> Orange Otter Toys</strong>507 Georgia Ave, Suite A<br>North Augusta, SC 29841</address></div>
 </div></section>
 
-{REVIEWS_HTML}<section class="faq" id="faq" aria-labelledby="faq-title"><div class="wrap">
+<section class="faq" id="faq" aria-labelledby="faq-title"><div class="wrap">
  <p class="kicker">Good to know</p><h2 id="faq-title">Questions, answered</h2>
  <div class="faq-list">
 {faq_items}
