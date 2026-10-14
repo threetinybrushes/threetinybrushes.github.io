@@ -303,6 +303,7 @@ html=f'''<!doctype html>
  <div class="foot-meta">
   <p class="foot-local"><span>Local to Augusta &amp; North Augusta</span> · <span>Shipping nationwide</span></p>
   <p class="small">© 2026 Three Tiny Brushes · Checkout by Square</p>
+  <p class="small">We count visits with GoatCounter (no cookies, no personal info).</p>
  </div>
 </div></footer>
 </body>

@@ -3,11 +3,12 @@
  * The DSN and the Clarity ID are public values (they end up in every visitor's browser), so it's fine to commit them. */
 var SENTRY_DSN = '';   // Sentry > Settings > Projects > (project) > Client Keys (DSN), e.g. 'https://abc123@o123456.ingest.us.sentry.io/1234567'
 var CLARITY_ID = '';   // Microsoft Clarity > Settings > Setup > project ID, e.g. 'abcd1234ef'
+var GOATCOUNTER = 'https://threetinybrushes.goatcounter.com/count';  // GoatCounter visitor counts (free, no cookies). Public dashboard: https://threetinybrushes.goatcounter.com/
 var RELEASE = 'unreleased';  // stamped with the git short sha by tools/deploy_github.sh when SENTRY_DSN is set
 
 (function () {
   'use strict';
-  if (!SENTRY_DSN && !CLARITY_ID) return;
+  if (!SENTRY_DSN && !CLARITY_ID && !GOATCOUNTER) return;
 
   // Pinned Sentry browser bundle (errors only: no tracing, no replay) with Subresource Integrity.
   var SENTRY_SRC = 'https://browser.sentry-cdn.com/10.75.3/bundle.min.js';
@@ -58,6 +59,15 @@ var RELEASE = 'unreleased';  // stamped with the git short sha by tools/deploy_g
         early = [];
       };
       document.head.appendChild(s);
+    });
+  }
+
+  if (GOATCOUNTER && /(^|\.)threetinybrushes\.(com|github\.io)$/i.test(location.hostname)) {
+    // Privacy-friendly page counter: no cookies, no personal data. Skips local previews.
+    later(function () {
+      var g = document.createElement('script');
+      g.async = true; g.src = 'https://gc.zgo.at/count.js'; g.setAttribute('data-goatcounter', GOATCOUNTER);
+      document.head.appendChild(g);
     });
   }
 
